@@ -1,0 +1,16 @@
+apiVersion: flux.kluctl.io/v1alpha1
+kind: KluctlDeployment
+metadata:
+  name: fancystore-production
+  namespace: kluctl-system
+spec:
+  interval: 1m
+  source:
+    git:
+      url: https://github.com/6ill/microservices-boutique-kubernetes.git
+      ref:
+        branch: main 
+
+  path: ./deployment
+  target: production
+  prune: true
