@@ -12,7 +12,7 @@ images:
   newTag: 217ccbeb0084c90e22f5208ea6754383c76bee35
 - name: us-central1-docker.pkg.dev/google-samples/microservices-demo/cartservice
   newName: ghcr.io/6ill/cartservice
-  newTag: 252f0eaa9dd467b3b01cf915591878c6a7e19a2e
+  newTag: a8827a17d19bed0bb9c91b27465daa8ed80a2115
 - name: us-central1-docker.pkg.dev/google-samples/microservices-demo/recommendationservice
   newName: ghcr.io/6ill/recommendationservice
   newTag: 217ccbeb0084c90e22f5208ea6754383c76bee35
