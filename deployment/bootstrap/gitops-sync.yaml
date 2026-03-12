@@ -1,4 +1,4 @@
-apiVersion: flux.kluctl.io/v1beta1
+apiVersion: gitops.kluctl.io/v1beta1
 kind: KluctlDeployment
 metadata:
   name: fancystore-production
@@ -11,6 +11,5 @@ spec:
       ref:
         branch: main 
 
-  path: ./deployment
   target: production
   prune: true
