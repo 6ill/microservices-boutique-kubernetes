@@ -20,3 +20,8 @@ grafana:
   adminPassword: "admin" # only for demo
   service:
     type: ClusterIP
+
+# To prevent Race Condition
+victoria-metrics-operator:
+  admissionWebhooks:
+    enabled: false
