@@ -1,0 +1,22 @@
+# Disable optional features
+alertmanager:
+  enabled: false
+vmalert:
+  enabled: false
+
+# Resource Tuning
+vmsingle:
+  spec:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
+      limits:
+        cpu: 300m
+        memory: 350Mi
+
+grafana:
+  enabled: true
+  adminPassword: "admin" # only for demo
+  service:
+    type: ClusterIP

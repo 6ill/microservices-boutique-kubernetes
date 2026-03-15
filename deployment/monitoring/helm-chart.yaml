@@ -1,0 +1,6 @@
+helmChart:
+  repo: https://victoriametrics.github.io/helm-charts/
+  chartName: victoria-metrics-k8s-stack
+  chartVersion: 0.25.1
+  releaseName: observability
+  namespace: monitoring
