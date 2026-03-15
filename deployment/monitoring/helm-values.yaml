@@ -1,11 +1,24 @@
 alertmanager:
   enabled: false
 
+prometheusOperator:
+  admissionWebhooks:
+    enabled: false
+  tls:
+    enabled: false
+
 grafana:
   enabled: true
   adminPassword: "admin" # only for demo
   service:
     type: ClusterIP
+  resources:
+    requests:
+      cpu: 50m
+      memory: 100Mi
+    limits:
+      cpu: 200m
+      memory: 200Mi
 
 prometheus:
   prometheusSpec:
