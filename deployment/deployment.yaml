@@ -1,3 +1,4 @@
 deployments:
   - path: environments/production
   - path: monitoring
+    waitReadiness: false
