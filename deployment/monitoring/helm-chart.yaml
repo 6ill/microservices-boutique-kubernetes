@@ -1,6 +1,6 @@
 helmChart:
-  repo: https://victoriametrics.github.io/helm-charts/
-  chartName: victoria-metrics-k8s-stack
-  chartVersion: 0.25.1
+  repo: oci://ghcr.io/prometheus-community/charts
+  chartName: kube-prometheus-stack
+  chartVersion: 56.21.0
   releaseName: observability
   namespace: monitoring
