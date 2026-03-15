@@ -1,5 +1,5 @@
 helmChart:
-  repo: oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack
+  repo: oci://ghcr.io/prometheus-community/charts/prometheus
   chartVersion: 56.21.0
   releaseName: observability
   namespace: monitoring
