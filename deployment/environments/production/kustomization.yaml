@@ -15,7 +15,7 @@ images:
   newTag: a8827a17d19bed0bb9c91b27465daa8ed80a2115
 - name: us-central1-docker.pkg.dev/google-samples/microservices-demo/checkoutservice
   newName: ghcr.io/6ill/checkoutservice
-  newTag: 010d8dbd7d49328df9dfe7b5d68543c88c54c3eb
+  newTag: 0042cdfb76e8e30b4425f7c6f577e6dc693f200d
 - name: us-central1-docker.pkg.dev/google-samples/microservices-demo/recommendationservice
   newName: ghcr.io/6ill/recommendationservice
   newTag: 217ccbeb0084c90e22f5208ea6754383c76bee35
