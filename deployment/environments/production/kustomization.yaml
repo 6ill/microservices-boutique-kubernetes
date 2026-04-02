@@ -6,6 +6,16 @@ resources:
 patches:
 - path: ./patches/Deployment.adservice.yaml
 - path: ./patches/Deployment.cartservice.yaml
+- target:
+      kind: Deployment
+      name: ingress-nginx-controller
+      namespace: ingress-nginx
+  patch: |-
+    - op: add
+      path: /spec/template/metadata/annotations
+      value:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "10254"
 images:
 - name: us-central1-docker.pkg.dev/google-samples/microservices-demo/adservice
   newName: ghcr.io/6ill/adservice
