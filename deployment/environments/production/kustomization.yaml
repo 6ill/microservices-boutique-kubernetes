@@ -6,6 +6,7 @@ resources:
 patches:
 - path: ./patches/Deployment.adservice.yaml
 - path: ./patches/Deployment.cartservice.yaml
+- path: ./patches/Ingress.frontend.yaml
 - target:
       kind: Deployment
       name: ingress-nginx-controller
