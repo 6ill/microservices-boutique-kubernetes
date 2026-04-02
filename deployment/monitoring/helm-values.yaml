@@ -27,3 +27,29 @@ grafana:
 victoria-metrics-operator:
   admissionWebhooks:
     enabled: false
+
+vmagent:
+  enabled: true
+  spec:
+    # VMAgent microservices discovery
+    inlineScrapeConfig: |
+      - job_name: 'boutique-microservices'
+        kubernetes_sd_configs:
+          - role: pod
+        relabel_configs:
+          # targeting pods that are permitted to be scraped
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+            action: keep
+            regex: true
+          - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+            action: replace
+            regex: ([^:]+)(?::\d+)?;(\d+)
+            replacement: $1:$2
+            target_label: __address__
+          # get app name to be used as label
+          - source_labels: [__meta_kubernetes_pod_label_app]
+            action: replace
+            target_label: app
+          - source_labels: [__meta_kubernetes_namespace]
+            action: replace
+            target_label: namespace
