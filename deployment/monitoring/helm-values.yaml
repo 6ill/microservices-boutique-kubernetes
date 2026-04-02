@@ -1,3 +1,5 @@
+fullnameOverride: "vm" # prevent long DNS name
+
 # Disable optional features
 alertmanager:
   enabled: false
