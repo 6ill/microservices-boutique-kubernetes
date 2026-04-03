@@ -1,4 +1,6 @@
 deployments:
+  - path: namespaces
+  - barrier: true
   - path: environments/production
   - path: monitoring
     waitReadiness: false
