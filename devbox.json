@@ -6,7 +6,8 @@
     "kubectl@latest",
     "kluctl@latest",
     "kubernetes-helm@latest",
-    "kustomize@latest"
+    "kustomize@latest",
+    "kind@latest"
   ],
   "shell": {
     "init_hook": [

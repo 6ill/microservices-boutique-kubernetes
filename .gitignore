@@ -4,6 +4,7 @@
 # Ignore the devbox hidden directory which contains local state and packages
 .devbox/
 .direnv/
+**/kind-config.yaml
 
 # ----------------------------------------------------------------------
 # Terraform
