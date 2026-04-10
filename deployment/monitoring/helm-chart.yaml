@@ -1,7 +1,7 @@
 helmChart:
-  repo: https://victoriametrics.github.io/helm-charts/
-  chartName: victoria-metrics-k8s-stack
-  chartVersion: 0.72.4
-  releaseName: observability
+  repo: https://prometheus-community.github.io/helm-charts
+  chartName: kube-prometheus-stack
+  chartVersion: 83.3.0
+  releaseName: prometheus
   namespace: monitoring
   skipPrePull: true

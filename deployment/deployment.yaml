@@ -3,4 +3,5 @@ deployments:
   - barrier: true
   - path: environments/production
   - path: monitoring
+  - include: istio-system
     waitReadiness: false

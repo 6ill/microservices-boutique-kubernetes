@@ -1,3 +1,5 @@
+discriminator: gitops-boutique
+
 targets:
   - name: production
     context: default

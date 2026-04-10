@@ -1,0 +1,7 @@
+helmChart:
+  repo: https://istio-release.storage.googleapis.com/charts
+  chartName: base
+  chartVersion: 1.29.0
+  releaseName: istio-base
+  namespace: istio-system
+  skipPrePull: true

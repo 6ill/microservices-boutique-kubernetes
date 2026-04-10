@@ -1,0 +1,8 @@
+# Deploy the Istio Control Plane
+helmChart:
+  repo: https://istio-release.storage.googleapis.com/charts
+  chartName: istiod
+  chartVersion: 1.29.0
+  releaseName: istiod
+  namespace: istio-system
+  skipPrePull: true

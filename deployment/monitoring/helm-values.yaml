@@ -1,21 +1,11 @@
-fullnameOverride: "vm" # prevent long DNS name
-
-# Disable optional features
-alertmanager:
+kubeControllerManager:
   enabled: false
-vmalert:
+kubeScheduler:
   enabled: false
-
-# Resource Tuning
-vmsingle:
-  spec:
-    resources:
-      requests:
-        cpu: 50m
-        memory: 128Mi
-      limits:
-        cpu: 300m
-        memory: 350Mi
+kubeEtcd:
+  enabled: false
+kubeProxy:
+  enabled: false
 
 grafana:
   enabled: true
@@ -23,33 +13,34 @@ grafana:
   service:
     type: ClusterIP
 
-# To prevent Race Condition
-victoria-metrics-operator:
-  admissionWebhooks:
-    enabled: false
 
-vmagent:
-  enabled: true
-  spec:
-    # VMAgent microservices discovery
-    inlineScrapeConfig: |
-      - job_name: 'boutique-microservices'
+prometheus:
+  prometheusSpec:
+    ruleSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+    
+    additionalScrapeConfigs:
+      - job_name: 'istio-envoy-proxies'
+        metrics_path: /stats/prometheus
         kubernetes_sd_configs:
           - role: pod
         relabel_configs:
-          # targeting pods that are permitted to be scraped
-          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+          # Only scrape pods that actually have an istio-proxy container
+          - source_labels: [__meta_kubernetes_pod_container_name]
             action: keep
-            regex: true
-          - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+            regex: 'istio-proxy'
+          # Override the target address to port 15020 (Envoy prometheus port)
+          - source_labels: [__address__]
             action: replace
-            regex: ([^:]+)(?::\d+)?;(\d+)
-            replacement: $1:$2
+            regex: ([^:]+)(?::\d+)?
+            replacement: $1:15020
             target_label: __address__
-          # get app name to be used as label
+          # Map Kubernetes labels to Prometheus labels for easy querying
           - source_labels: [__meta_kubernetes_pod_label_app]
-            action: replace
             target_label: app
           - source_labels: [__meta_kubernetes_namespace]
-            action: replace
             target_label: namespace
+          - source_labels: [__meta_kubernetes_pod_name]
+            target_label: pod
