@@ -249,6 +249,54 @@
         }
       }
     },
+    "kubectx@latest": {
+      "last_modified": "2026-03-30T07:26:21Z",
+      "resolved": "github:NixOS/nixpkgs/15c6719d8c604779cf59e03c245ea61d3d7ab69b#kubectx",
+      "source": "devbox-search",
+      "version": "0.11.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/nhgfqyvh25mdwbv71lijsl13507s6cs9-kubectx-0.11.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/nhgfqyvh25mdwbv71lijsl13507s6cs9-kubectx-0.11.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/5qwfxlsgdfx432qmy56ljdp66mjzlsg0-kubectx-0.11.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/5qwfxlsgdfx432qmy56ljdp66mjzlsg0-kubectx-0.11.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/cci393rbvkp29195nb3wjc2x13m6421k-kubectx-0.11.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/cci393rbvkp29195nb3wjc2x13m6421k-kubectx-0.11.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/iv20jjq96zg2f4riww5lnivr8fsz8gv2-kubectx-0.11.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/iv20jjq96zg2f4riww5lnivr8fsz8gv2-kubectx-0.11.0"
+        }
+      }
+    },
     "kubernetes-helm@latest": {
       "last_modified": "2026-02-23T15:40:43Z",
       "resolved": "github:NixOS/nixpkgs/80d901ec0377e19ac3f7bb8c035201e2e098cc97#kubernetes-helm",
