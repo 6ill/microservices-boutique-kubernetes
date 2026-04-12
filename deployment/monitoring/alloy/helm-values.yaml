@@ -1,0 +1,55 @@
+alloy:
+  configMap:
+    create: true
+    content: |-
+      // Discover all pods in the Kubernetes cluster
+      discovery.kubernetes "pods" {
+        role = "pod"
+      }
+
+      // Relabeling rules to extract metadata for Loki labels
+      // This is crucial for production to be able to filter logs by app, namespace, etc.
+      discovery.relabel "pod_logs" {
+        targets = discovery.kubernetes.pods.targets
+
+        // Map Kubernetes namespace to Loki 'namespace' label
+        rule {
+          source_labels = ["__meta_kubernetes_namespace"]
+          action        = "replace"
+          target_label  = "namespace"
+        }
+
+        // Map Pod name to Loki 'pod' label
+        rule {
+          source_labels = ["__meta_kubernetes_pod_name"]
+          action        = "replace"
+          target_label  = "pod"
+        }
+
+        // Map Container name to Loki 'container' label
+        rule {
+          source_labels = ["__meta_kubernetes_pod_container_name"]
+          action        = "replace"
+          target_label  = "container"
+        }
+        
+        // Map Application label to Loki 'app' label
+        rule {
+          source_labels = ["__meta_kubernetes_pod_label_app"]
+          action        = "replace"
+          target_label  = "app"
+        }
+      }
+
+      // Collect logs from the discovered targets
+      loki.source.kubernetes "pod_logs" {
+        targets    = discovery.relabel.pod_logs.output
+        forward_to = [loki.write.default.receiver]
+      }
+
+      // Send the collected logs to the Loki database
+      loki.write "default" {
+        endpoint {
+          url = "http://loki:3100/loki/api/v1/push"
+        }
+      }

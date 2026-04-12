@@ -2,6 +2,6 @@ deployments:
   - path: namespaces
   - barrier: true
   - path: environments/production
-  - path: monitoring
+  - include: monitoring
   - include: istio-system
     waitReadiness: false

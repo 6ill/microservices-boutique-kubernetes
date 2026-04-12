@@ -1,0 +1,7 @@
+helmChart:
+  repo: https://grafana.github.io/helm-charts
+  chartName: loki
+  chartVersion: 6.54.0
+  releaseName: loki
+  namespace: monitoring
+  skipPrePull: true

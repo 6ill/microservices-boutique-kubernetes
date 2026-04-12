@@ -12,6 +12,13 @@ grafana:
   adminPassword: "admin" # only for demo
   service:
     type: ClusterIP
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: http://loki:3100
+      jsonData:
+        maxLines: 1000
 
 
 prometheus:

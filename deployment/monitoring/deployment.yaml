@@ -1,0 +1,4 @@
+deployments:
+  - path: loki
+  - path: alloy
+  - path: prometheus-grafana
