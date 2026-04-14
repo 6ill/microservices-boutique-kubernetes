@@ -1,4 +1,13 @@
 alloy:
+  extraPorts:
+    - name: otlp-grpc
+      port: 4317
+      targetPort: 4317
+      protocol: TCP
+    - name: otlp-http
+      port: 4318
+      targetPort: 4318
+      protocol: TCP
   configMap:
     create: true
     content: |-
@@ -51,5 +60,36 @@ alloy:
       loki.write "default" {
         endpoint {
           url = "http://loki:3100/loki/api/v1/push"
+        }
+      }
+
+      // TRACING
+      otelcol.receiver.otlp "default" {
+        grpc { 
+          endpoint = "0.0.0.0:4317" 
+        }
+        http {
+          endpoint = "0.0.0.0:4318"
+        }
+        output { 
+          traces = [otelcol.processor.batch.default.input] 
+        }
+      }
+
+      // Batching traces for CPU effiency
+      otelcol.processor.batch "default" {
+        output { 
+          traces = [otelcol.exporter.otlp.tempo.input] 
+        }
+      }
+
+      // Send collected traces to Tempo
+      otelcol.exporter.otlp "tempo" {
+        client {
+          endpoint = "tempo:4317"
+          tls {
+            insecure             = true
+            insecure_skip_verify = true
+          }
         }
       }

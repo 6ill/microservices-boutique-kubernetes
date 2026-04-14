@@ -1,0 +1,7 @@
+helmChart:
+  repo: https://grafana.github.io/helm-charts
+  chartName: tempo
+  chartVersion: 1.24.3
+  releaseName: tempo
+  namespace: monitoring
+  skipPrePull: true

@@ -17,6 +17,133 @@ patches:
     kind: Deployment
     name: ingress-nginx-controller
     namespace: ingress-nginx
+  
+# For distributed tracing
+- patch: |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: frontend
+    spec:
+      template:
+        spec:
+          containers:
+            - name: server
+              env:
+              - name: ENABLE_TRACING
+                value: "1"
+              - name: OTEL_SERVICE_NAME
+                value: "frontend"
+              - name: OTEL_EXPORTER_OTLP_ENDPOINT
+                value: "http://alloy.monitoring.svc.cluster.local:4317"
+- patch: |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: checkoutservice
+    spec:
+      template:
+        spec:
+          containers:
+            - name: server
+              env:
+              - name: ENABLE_TRACING
+                value: "1"
+              - name: OTEL_SERVICE_NAME
+                value: "checkoutservice"
+              - name: OTEL_EXPORTER_OTLP_ENDPOINT
+                value: "http://alloy.monitoring.svc.cluster.local:4317"
+
+- patch: |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: currencyservice
+    spec:
+      template:
+        spec:
+          containers:
+            - name: server
+              env:
+              - name: ENABLE_TRACING
+                value: "1"
+              - name: OTEL_SERVICE_NAME
+                value: "currencyservice"
+              - name: OTEL_EXPORTER_OTLP_ENDPOINT
+                value: "http://alloy.monitoring.svc.cluster.local:4317"
+
+- patch: |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: emailservice
+    spec:
+      template:
+        spec:
+          containers:
+            - name: server
+              env:
+              - name: ENABLE_TRACING
+                value: "1"
+              - name: OTEL_SERVICE_NAME
+                value: "emailservice"
+              - name: OTEL_EXPORTER_OTLP_ENDPOINT
+                value: "http://alloy.monitoring.svc.cluster.local:4317"
+
+- patch: |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: paymentservice
+    spec:
+      template:
+        spec:
+          containers:
+            - name: server
+              env:
+              - name: ENABLE_TRACING
+                value: "1"
+              - name: OTEL_SERVICE_NAME
+                value: "paymentservice"
+              - name: OTEL_EXPORTER_OTLP_ENDPOINT
+                value: "http://alloy.monitoring.svc.cluster.local:4317"      
+
+- patch: |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: productcatalogservice
+    spec:
+      template:
+        spec:
+          containers:
+            - name: server
+              env:
+              - name: ENABLE_TRACING
+                value: "1"
+              - name: OTEL_SERVICE_NAME
+                value: "productcatalogservice"
+              - name: OTEL_EXPORTER_OTLP_ENDPOINT
+                value: "http://alloy.monitoring.svc.cluster.local:4317"     
+
+- patch: |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: recommendationservice
+    spec:
+      template:
+        spec:
+          containers:
+            - name: server
+              env:
+              - name: ENABLE_TRACING
+                value: "1"
+              - name: OTEL_SERVICE_NAME
+                value: "recommendationservice"
+              - name: OTEL_EXPORTER_OTLP_ENDPOINT
+                value: "http://alloy.monitoring.svc.cluster.local:4317"  
+    
 images:
 - name: us-central1-docker.pkg.dev/google-samples/microservices-demo/adservice
   newName: ghcr.io/6ill/adservice
