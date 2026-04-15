@@ -4,6 +4,13 @@ resources:
 - https://github.com/6ill/cloud-microservices-demo/kustomize/base
 - patches/Ingress.frontend.yaml
 
+  
+# For distributed tracing
+
+
+
+
+
 patches:
 - path: ./patches/Deployment.adservice.yaml
 - path: ./patches/Deployment.cartservice.yaml
@@ -17,8 +24,6 @@ patches:
     kind: Deployment
     name: ingress-nginx-controller
     namespace: ingress-nginx
-  
-# For distributed tracing
 - patch: |-
     apiVersion: apps/v1
     kind: Deployment
@@ -53,7 +58,6 @@ patches:
                 value: "checkoutservice"
               - name: OTEL_EXPORTER_OTLP_ENDPOINT
                 value: "http://alloy.monitoring.svc.cluster.local:4317"
-
 - patch: |-
     apiVersion: apps/v1
     kind: Deployment
@@ -71,7 +75,6 @@ patches:
                 value: "currencyservice"
               - name: OTEL_EXPORTER_OTLP_ENDPOINT
                 value: "http://alloy.monitoring.svc.cluster.local:4317"
-
 - patch: |-
     apiVersion: apps/v1
     kind: Deployment
@@ -89,60 +92,23 @@ patches:
                 value: "emailservice"
               - name: OTEL_EXPORTER_OTLP_ENDPOINT
                 value: "http://alloy.monitoring.svc.cluster.local:4317"
-
-- patch: |-
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: paymentservice
-    spec:
-      template:
-        spec:
-          containers:
-            - name: server
-              env:
-              - name: ENABLE_TRACING
-                value: "1"
-              - name: OTEL_SERVICE_NAME
-                value: "paymentservice"
-              - name: OTEL_EXPORTER_OTLP_ENDPOINT
-                value: "http://alloy.monitoring.svc.cluster.local:4317"      
-
-- patch: |-
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: productcatalogservice
-    spec:
-      template:
-        spec:
-          containers:
-            - name: server
-              env:
-              - name: ENABLE_TRACING
-                value: "1"
-              - name: OTEL_SERVICE_NAME
-                value: "productcatalogservice"
-              - name: OTEL_EXPORTER_OTLP_ENDPOINT
-                value: "http://alloy.monitoring.svc.cluster.local:4317"     
-
-- patch: |-
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: recommendationservice
-    spec:
-      template:
-        spec:
-          containers:
-            - name: server
-              env:
-              - name: ENABLE_TRACING
-                value: "1"
-              - name: OTEL_SERVICE_NAME
-                value: "recommendationservice"
-              - name: OTEL_EXPORTER_OTLP_ENDPOINT
-                value: "http://alloy.monitoring.svc.cluster.local:4317"  
+- patch: "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: paymentservice\nspec:\n
+    \ template:\n    spec:\n      containers:\n        - name: server\n          env:\n
+    \         - name: ENABLE_TRACING\n            value: \"1\"\n          - name:
+    OTEL_SERVICE_NAME\n            value: \"paymentservice\"\n          - name: OTEL_EXPORTER_OTLP_ENDPOINT\n
+    \           value: \"http://alloy.monitoring.svc.cluster.local:4317\"      "
+- patch: "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: productcatalogservice\nspec:\n
+    \ template:\n    spec:\n      containers:\n        - name: server\n          env:\n
+    \         - name: ENABLE_TRACING\n            value: \"1\"\n          - name:
+    OTEL_SERVICE_NAME\n            value: \"productcatalogservice\"\n          - name:
+    OTEL_EXPORTER_OTLP_ENDPOINT\n            value: \"http://alloy.monitoring.svc.cluster.local:4317\"
+    \    "
+- patch: "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: recommendationservice\nspec:\n
+    \ template:\n    spec:\n      containers:\n        - name: server\n          env:\n
+    \         - name: ENABLE_TRACING\n            value: \"1\"\n          - name:
+    OTEL_SERVICE_NAME\n            value: \"recommendationservice\"\n          - name:
+    OTEL_EXPORTER_OTLP_ENDPOINT\n            value: \"http://alloy.monitoring.svc.cluster.local:4317\"
+    \ "
     
 images:
 - name: us-central1-docker.pkg.dev/google-samples/microservices-demo/adservice
@@ -153,7 +119,7 @@ images:
   newTag: a8827a17d19bed0bb9c91b27465daa8ed80a2115
 - name: us-central1-docker.pkg.dev/google-samples/microservices-demo/checkoutservice
   newName: ghcr.io/6ill/checkoutservice
-  newTag: 0042cdfb76e8e30b4425f7c6f577e6dc693f200d
+  newTag: e2758665dc2f2e79445099ff093d9cff9bfde287
 - name: us-central1-docker.pkg.dev/google-samples/microservices-demo/frontend
   newName: ghcr.io/6ill/frontend
   newTag: 174f22396a50dd48daebd319d6e8482df940cbc8
